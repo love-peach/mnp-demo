@@ -1,0 +1,86 @@
+/* 搜索条按钮样式 */
+.search-wrap {
+  position: relative;
+  padding: 8px 10px;
+  /* background-color: #fff; */
+  background-color: #EFEFF4;
+}
+.search-wrap .search-input {
+  height: 60rpx;
+  padding-left: 60rpx;
+  font-size: 30rpx;
+  border-radius: 6rpx;
+  background-color: #fff;
+}
+.search-wrap .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 30rpx;
+  transform: translate(0, -50%);
+}
+
+/* 候选词样式 */
+.search-candidate-wrap {
+  padding: 10rpx 20rpx;
+}
+
+.search-title-bar {
+  display:flex;
+  margin-bottom: 20rpx;
+}
+.title-text {
+  flex: 1;
+  font-size: 30rpx;
+}
+.title-operation {
+  font-size:0;
+}
+.operation-del {
+  width: 46rpx;
+  height: 46rpx;
+}
+
+/* tag 样式 */
+.tag-container {
+  overflow: hidden;
+  margin:0 -10rpx;
+}
+.tag-item-box {
+  width: 20%;
+  float: left;
+}
+.tag-wrap {
+  position: relative;
+  margin: 6rpx;
+  padding: 6rpx;
+  color: #999;
+  font-size: 30rpx;
+  text-align: center;
+  border-radius: 6rpx;
+  background-color: #EFEFF4;
+}
+.tag-close {
+
+  margin-left: 20rpx;
+  height: 28rpx;
+  width: 28rpx;
+  line-height: 22rpx;
+  border-radius: 28rpx;
+  display:inline-block;
+}
+.tag-close:hover {
+  color: #fff;
+  background-color: #4EA1DB;
+}
+/* 搜索历史样式 */
+.search-history {
+  padding: 30rpx 0;
+}
+
+/* 热门币种样式  */
+.search-hot {
+  padding: 30rpx 0;
+  border-top: 1px solid #EFEFF4;
+}
+
+/* 搜索结果 */

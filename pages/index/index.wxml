@@ -1,0 +1,51 @@
+<!-- 顶部搜索条 start  -->
+  <view class="search-wrap">
+    <navigator class="search-link" url="/pages/search/search" hover-class="none">
+      <icon class="search-icon" type="search" size="16"></icon>
+      <text class="search-text">搜索</text>
+    </navigator>
+  </view>
+<!-- 顶部搜索条 end  -->
+
+
+<!-- 列表 start  -->
+
+<view class="table-list">
+  <!-- 列表头 -->
+  <view class="tr table-head">
+    <view class="th row-name">名称</view>
+    <view class="th row-new">最新</view>
+    <view class="th row-change active descending">
+      <text>涨跌</text>
+      <view class="triangle-wrap">
+        <view class="triangle triangle-top"></view>
+        <view class="triangle triangle-bottom"></view>
+      </view>
+    </view>
+    <view class="th row-change active ascending">
+      <text>七天涨跌</text>
+      <view class="triangle-wrap">
+        <view class="triangle triangle-top"></view>
+        <view class="triangle triangle-bottom"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 列表body -->
+  <navigator url="/pages/details/details?id={{index}}" wx:for="{{listData}}" wx:key="{{index}}">
+    <view class="tr">
+      <view class="td row-name">{{item.name}}</view>
+      <view class="td row-new">
+        <view class="price-main price-positive">{{item.new}}</view>
+        <view class="price-sub">{{item.new}}</view>
+      </view>
+      <view class="td row-change">
+        <view class="card card-positive">{{item.change}}</view>
+      </view>
+      <view class="td row-change">
+        <view class="card card-negative">{{item.changeWeek}}</view>
+      </view>
+    </view>
+  </navigator>
+
+</view>

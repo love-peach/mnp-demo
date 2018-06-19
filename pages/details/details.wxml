@@ -1,0 +1,62 @@
+<import src="../../wxParse/wxParse.wxml"/> 
+
+<view class="container">
+  <!-- 概览 -->
+  <view class="overview">
+    <view class="info-main">
+      <text class="price-main">$69803.09</text>
+      <text class="price-sub">￥1903.52</text>
+    </view>
+    <view class="info-sub">
+      <view class="sub-item">
+        <text class="item-title">涨跌</text>
+        <text class="item-data">+1.98%</text>
+      </view>
+      <view class="sub-item">
+        <text class="item-title">总市值</text>
+        <text class="item-data">+1.98%</text>
+      </view>
+      <view class="sub-item">
+        <text class="item-title">7天涨跌</text>
+        <text class="item-data">+1.98%</text>
+      </view>
+      <view class="sub-item">
+        <text class="item-title">流通市值</text>
+        <text class="item-data">+1.98%</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 币种讨论 -->
+  <view class="discuss-part-title">币种讨论</view>
+  <view class="discuss">
+    <block wx:for="{{discussList}}" wx:key="{{item.itemid}}">
+
+      <view class="discuss-item-wrap">
+
+        <view class="user">
+          <image class="user-avatar" src="{{item.mblog.user.profile_image_url}}"></image>
+          <view class="user-info">
+            <text class="info-name">{{item.mblog.user.screen_name}}</text>
+            <text class="info-mate-time">{{item.mblog.created_at}}</text>
+          </view>
+        </view>
+
+        <view class="content">
+          
+            <!-- <template is="wxParse" data="{{wxParseData:dkcontent.nodes}}"/> -->
+
+
+             <wxparse-html blogData="{{item.mblog}}"></wxparse-html>
+            
+          <!-- <text class="content-text">{{item.mblog.text}}</text> -->
+
+        </view>
+
+      </view>
+
+    </block>
+
+  </view>
+  
+</view>

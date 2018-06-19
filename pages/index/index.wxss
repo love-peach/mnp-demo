@@ -1,0 +1,138 @@
+/**index.wxss**/
+/* 搜索条按钮样式 */
+.search-wrap {
+  padding: 16rpx 20rpx;
+  /* background-color: #fff; */
+  background-color: #EFEFF4;
+}
+.search-link {
+  text-align: center;
+  background-color: #fff;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* background-color: #fafafa; */
+  /* border: 1rpx solid #f1f1f1; */
+  border-radius: 3rpx;
+}
+.search-link .search-icon {
+  font-size: inherit;
+}
+.search-link .search-text {
+  margin-left: 16rpx;
+  font-size: 32rpx;
+  color: #aaa;
+  line-height: 1;
+}
+
+/* 三角样式 */
+.triangle-wrap {
+  position: relative;
+  top: 4rpx; 
+  display: inline-block;
+  margin-left: 6rpx;
+}
+.triangle-wrap .triangle {
+  width: 0;
+  height: 0;
+  border-top: 12rpx solid #aaa;
+  border-bottom: 12rpx solid #aaa;
+  border-left: 8rpx solid rgba(0,0,0,0);
+  border-right: 8rpx solid rgba(0,0,0,0);
+}
+.triangle-wrap .triangle-top {
+  border-top: 0;
+  margin-bottom: 4rpx;
+}
+.triangle-wrap .triangle-bottom {
+  border-bottom: 0;
+  margin-top: 4rpx;
+}
+/* 升序 */
+.ascending .triangle-top {
+  border-bottom-color: #4EA1DB;
+}
+/* 降序 */
+.descending .triangle-bottom{
+  border-top-color: #4EA1DB;
+}
+
+/* 列表样式  */
+.table-list {
+  font-size: 28rpx;
+}
+.table-list .table-head{
+  background-color: #f5f5f5;
+}
+.table-list .table-head .th{
+  padding: 10rpx;
+}
+.table-list .table-head .th.active{
+  color: #4EA1DB;
+}
+.table-list .tr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1rpx solid #EFEFF4;
+  padding: 0 14rpx;
+}
+
+/* 不同数据给不同宽度 */
+.table-list .row-name {
+  flex: 1;
+}
+.table-list .row-new {
+  /* text-align: right; */
+  flex-basis: 150rpx;
+}
+.table-list .row-change {
+  /* text-align: right; */
+  flex-basis: 150rpx;
+}
+
+.table-list .td {
+  padding: 10rpx;
+}
+.table-list .td.row-name {
+  font-weight: 500;
+}
+.table-list .td .price-main {
+  font-weight: 500;
+  font-size: 28rpx;
+  line-height: 1;
+}
+.table-list .td .price-sub{
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  line-height: 1;
+  color: #aaa;
+}
+.table-list .td .price-sub::before {
+  content: '￥';
+}
+.table-list .td .price-positive {
+  color: #09bb07;
+}
+.table-list .td .price-negative {
+  color: #e64340;
+}
+
+.table-list .td .card {
+  display: block;
+  padding: 6rpx 10rpx;
+  color: #fff;
+  border-radius: 6rpx;
+}
+.table-list .td .card-positive {
+  background-color: #09bb07;
+}
+.table-list .td .card-positive::before {
+  content: '+';
+}
+.table-list .td .card-negative {
+  background-color: #e64340;
+}
+.table-list .td .card-negative::before {
+  content: '-';
+}
+

@@ -1,0 +1,13 @@
+<import src="/wxParse/wxParse.wxml"/>
+
+<view class="wxparse-html-wrap">
+  <view wx:if="{{blogData.text}}" class="blog-origin">
+    <template is="wxParse" data="{{wxParseData:blogOrigin.nodes}}"/> 
+    <img-list is="img-list" imgList="{{blogData.pics}}"></img-list>
+  </view>
+
+  <view wx:if="{{blogData.retweeted_status}}" class="blog-retweet">
+    <template is="wxParse" data="{{wxParseData:blogRetweet.nodes}}"/>
+    <img-list is="img-list" imgList="{{blogData.retweeted_status.pics}}"></img-list> 
+  </view>
+</view>

@@ -1,0 +1,97 @@
+/*=========================== 概览样式 start  ===========================*/
+.overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25rpx;
+  background-color: #fff;
+  border-top: 1px solid #EAEDF3;
+}
+.info-main {
+  display: flex;
+  flex-direction: column;
+  /* flex-basis: 300rpx; */
+  flex: 1;
+}
+.info-main .price-main {
+  color: #019802;
+  font-size: 48rpx;
+  font-family: 'DIN Alternate';
+  font-weight: bolder;
+}
+.info-main .price-sub {
+  color: #4A4A4A;
+}
+
+.info-sub {
+  display: flex;
+  flex-direction: row;
+  /* flex: 1; */
+  flex-basis: 12em;
+  flex-wrap: wrap;
+  font-size: 28rpx;
+}
+.info-sub .sub-item {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin: 5rpx 0;
+}
+.info-sub .item-title {
+  color: #999;
+}
+/*=========================== 概览样式 end  ===========================*/
+
+/*=========================== 微博样式 start  ===========================*/
+.discuss-part-title {
+  margin-top: 20rpx;
+  padding: 24rpx;
+  text-align: center;
+  color: #4A4A4A;
+  font-size: 28rpx;
+  font-weight: 500;
+  border-bottom: 1px solid #EAEDF3;
+  background-color: #fff;
+}
+.discuss {
+  
+}
+.discuss-item-wrap {
+  background-color: #fff;
+  padding: 30rpx 0;
+}
+.discuss-item-wrap + .discuss-item-wrap {
+  margin-top: 10rpx;
+}
+.user {
+  display: flex;
+  padding-right: 30rpx;
+  padding-left: 30rpx;
+}
+.user .user-avatar {
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 80rpx;
+  margin-right: 20rpx;
+}
+.user .user-info {
+  display: flex;
+  flex-direction: column;
+}
+.user .user-info .info-name {
+  color: #333;
+  font-size: 28rpx;
+}
+.user .user-info .info-mate-time {
+  color: #9B9B9B;
+  font-size: 24rpx;
+}
+
+.content {
+  margin-top: 20rpx;
+}
+.content .content-text {
+  font-size: 30rpx;
+}
+
+/*=========================== 微博样式 end  ===========================*/

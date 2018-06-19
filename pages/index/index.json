@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "行情",
+  "usingComponents": {
+    "search-bar": "/component/search-bar/search-bar"
+  }
+}

@@ -1,0 +1,15 @@
+@import "/wxParse/wxParse.wxss";
+.wxparse-html-wrap {
+   font-size: 30rpx;
+   text-align: justify;
+   line-height: 1.46;
+}
+.blog-origin {
+  padding-right: 30rpx;
+  padding-left: 30rpx;
+  background-color: #fff;
+}
+.blog-retweet {
+  padding: 30rpx;
+  background-color: #F3F6FA;
+}

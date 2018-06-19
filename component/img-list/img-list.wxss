@@ -1,0 +1,11 @@
+.img-list-wrap {
+  font-size: 0;
+  margin-top: 20rpx;
+}
+.img-list-wrap .img-list-item {
+  display: inline-block
+}
+.img-list-wrap .img-list-item .img{
+  width: 220rpx;
+  height: 220rpx;
+}

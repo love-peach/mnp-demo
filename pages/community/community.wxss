@@ -1,0 +1,31 @@
+.container {
+  background-color: #fff;
+  color: #4A4A4A;
+  text-align: center
+}
+.text-title {
+  margin-top: 60rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #4A4A4A;
+}
+
+.qrcode-img {
+  width: 600rpx;
+  height: 600rpx;
+  margin: 0 auto;
+}
+
+.text-tip,
+.text-bottom {
+  font-size: 28rpx;
+}
+
+.text-bottom {
+  margin-top: 40rpx;
+}
+
+.tip-item {
+  display: block;
+}

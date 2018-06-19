@@ -1,0 +1,22 @@
+/**app.wxss**/
+@import "weui.wxss";
+@import "font-din.wxss";
+
+/* reset */
+page {
+  /* background-color: #F8F8F8; */
+  height: 100%;
+  font-size: 32rpx;
+  line-height: 1.6;
+}
+
+/* page */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  font-size: 32rpx;
+  color: #191919;
+  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+  background-color: #F3F6FA;
+}

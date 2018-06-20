@@ -24,7 +24,8 @@ Page({
     searchStr = '?' + searchArr.join('&');
     console.log(options.url + searchStr, '00')
     this.setData({
-      webUrl: options.url + searchStr
+      webUrl: options.url + searchStr,
+      // webUrl: 'https://mp.weixin.qq.com/s/oOAOUxD4ZQhmUCWIkR207Q'
     });
   },
 

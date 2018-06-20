@@ -1,26 +1,24 @@
 /**index.wxss**/
 /* 搜索条按钮样式 */
 .search-wrap {
-  padding: 16rpx 20rpx;
-  /* background-color: #fff; */
-  background-color: #EFEFF4;
+  padding: 20rpx 30rpx;
+  background-color: #fff; 
 }
 .search-link {
-  text-align: center;
-  background-color: #fff;
   height: 60rpx;
+  padding-left: 20rpx;
   line-height: 60rpx;
-  /* background-color: #fafafa; */
-  /* border: 1rpx solid #f1f1f1; */
-  border-radius: 3rpx;
+  border-radius: 6rpx;
+  background-color: #F3F6FA;
+  box-shadow: 0 3rpx 10rpx -3rpx rgba(194,209,221,50) inset;
 }
 .search-link .search-icon {
   font-size: inherit;
 }
 .search-link .search-text {
   margin-left: 16rpx;
-  font-size: 32rpx;
-  color: #aaa;
+  font-size: 28rpx;
+  color: #728BAE;
   line-height: 1;
 }
 
@@ -34,10 +32,10 @@
 .triangle-wrap .triangle {
   width: 0;
   height: 0;
-  border-top: 12rpx solid #aaa;
-  border-bottom: 12rpx solid #aaa;
-  border-left: 8rpx solid rgba(0,0,0,0);
-  border-right: 8rpx solid rgba(0,0,0,0);
+  border-top: 10rpx solid #CAD7EF;
+  border-bottom: 10rpx solid #CAD7EF;
+  border-left: 10rpx solid rgba(0,0,0,0);
+  border-right: 10rpx solid rgba(0,0,0,0);
 }
 .triangle-wrap .triangle-top {
   border-top: 0;
@@ -49,63 +47,73 @@
 }
 /* 升序 */
 .ascending .triangle-top {
-  border-bottom-color: #4EA1DB;
+  border-bottom-color: #728BAE;
 }
 /* 降序 */
 .descending .triangle-bottom{
-  border-top-color: #4EA1DB;
+  border-top-color: #728BAE;
 }
 
 /* 列表样式  */
 .table-list {
-  font-size: 28rpx;
-}
-.table-list .table-head{
-  background-color: #f5f5f5;
-}
-.table-list .table-head .th{
-  padding: 10rpx;
-}
-.table-list .table-head .th.active{
-  color: #4EA1DB;
+  font-size: 32rpx;
+  background-color: #fff;
+  font-family: 'DIN Alternate';
 }
 .table-list .tr {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1rpx solid #EFEFF4;
+  border-bottom: 1rpx solid #F3F6FA;
   padding: 0 14rpx;
+}
+.table-list .table-head{
+  font-size: 24rpx;
+  border-bottom: 1rpx solid #EAEDF3;
+}
+.table-list .table-head .th{
+  padding: 10rpx 20rpx;
+  color: #4A4A4A;
 }
 
 /* 不同数据给不同宽度 */
 .table-list .row-name {
-  flex: 1;
+  flex-basis: 90rpx;
 }
 .table-list .row-new {
-  /* text-align: right; */
-  flex-basis: 150rpx;
+  text-align: center; 
+  flex: 1;
 }
 .table-list .row-change {
-  /* text-align: right; */
+  text-align: center; 
+  flex-basis: 150rpx;
+}
+.table-list .row-change-week {
+  text-align: right; 
   flex-basis: 150rpx;
 }
 
 .table-list .td {
-  padding: 10rpx;
+  padding: 20rpx;
 }
 .table-list .td.row-name {
   font-weight: 500;
 }
+.table-list .td.row-new {
+  text-align: right;
+  padding-right: 50rpx;
+}
+
 .table-list .td .price-main {
   font-weight: 500;
-  font-size: 28rpx;
   line-height: 1;
 }
 .table-list .td .price-sub{
   margin-top: 10rpx;
-  font-size: 24rpx;
+  font-size: 20rpx;
   line-height: 1;
-  color: #aaa;
+  color: #9B9B9B;
+  font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
 }
 .table-list .td .price-sub::before {
   content: '￥';
@@ -119,18 +127,20 @@
 
 .table-list .td .card {
   display: block;
-  padding: 6rpx 10rpx;
+  padding: 10rpx 8rpx;
   color: #fff;
-  border-radius: 6rpx;
+  font-size: 32rpx;
+  text-align: center;
+  border-radius: 8rpx;
 }
 .table-list .td .card-positive {
-  background-color: #09bb07;
+  background-color: #019802;
 }
 .table-list .td .card-positive::before {
   content: '+';
 }
 .table-list .td .card-negative {
-  background-color: #e64340;
+  background-color: #E93030;
 }
 .table-list .td .card-negative::before {
   content: '-';

@@ -18,7 +18,8 @@
     line-height: 1.8;
 }
 view{
-    word-break:break-all; overflow:auto;
+    word-break:break-all; 
+    /* overflow:auto; */
 }
 .wxParse-inline{
     display: inline;
@@ -79,9 +80,11 @@ view{
 /*增加video的css样式*/
 .wxParse-strong,.wxParse-s{display: inline}
 .wxParse-a{
-    color: deepskyblue;
+    /* color: deepskyblue; */
     word-break:break-all;
     overflow:auto;
+    color: #2D61A7;
+    /* vertical-align: middle; */
 }
 
 .wxParse-video{

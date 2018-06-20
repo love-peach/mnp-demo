@@ -14,5 +14,16 @@ Page({
     });
     console.log(this.data.discussList);
     wxparse.wxParse('dkcontent', 'html', this.data.dkcontent, this, 5);  
-  }
+  },
+  jumpTo: function (e) {
+    var srcOg = e.currentTarget.dataset.src;
+    var patt = /^\/n\//;
+    if (patt.test(srcOg)) {
+      srcOg = 'https://m.weibo.cn' + srcOg;
+    }
+    var srcNew = srcOg.replace(/\?/ig, '&');
+    wx.navigateTo({
+      url: `/pages/web-view/web-view?url=${srcNew}`
+    });
+  },
 });

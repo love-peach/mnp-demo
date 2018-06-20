@@ -53,6 +53,11 @@ function wxParse(bindName = 'wxParseData', type='html', data='<div class="color:
 }
 // 图片点击事件
 function wxParseImgTap(e) {
+  console.log('表情图不预览');
+  var patt = /^https+:\/\/h5\.sinaimg\.cn/;
+  if (patt.test(e.target.dataset.src)) {
+    return false;
+  }
   var that = this;
   var nowImgUrl = e.target.dataset.src;
   var tagFrom = e.target.dataset.from;

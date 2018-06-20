@@ -1,8 +1,18 @@
 @import "/wxParse/wxParse.wxss";
 .wxparse-html-wrap {
    font-size: 30rpx;
-   text-align: justify;
+   /* text-align: justify; */
    line-height: 1.46;
+   word-wrap: break-word;
+}
+.wxparse-html-wrap .url-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4rpx;
+}
+.wxparse-html-wrap .url-icon .wxParse-img{
+  width: 32rpx !important;
+  height: 32rpx !important;
 }
 .blog-origin {
   padding-right: 30rpx;
@@ -12,4 +22,46 @@
 .blog-retweet {
   padding: 30rpx;
   background-color: #F3F6FA;
+}
+
+/* 图片列表样式 */
+.img-list-wrap {
+  font-size: 0;
+  margin-top: 20rpx;
+  margin-left: -8rpx;
+  margin-right: -8rpx;
+  margin-bottom: -16rpx;
+}
+.img-list-wrap .img-list-item {
+  display: inline-block;
+  padding-right: 8rpx;
+  padding-left: 8rpx;
+  margin-bottom: 16rpx;
+  width: 33.33%;
+  box-sizing: border-box;
+}
+.img-list-wrap .img-list-item .img{
+  width: 220rpx;
+  height: 220rpx;
+}
+.img-list-wrap .img-list-item .item-img-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+}
+.img-list-wrap .img-list-item .item-img-wrap .item-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.img-list-wrap .img-list-item .item-img-wrap .img-self {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0;
 }

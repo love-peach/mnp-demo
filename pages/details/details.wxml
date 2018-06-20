@@ -35,9 +35,9 @@
       <view class="discuss-item-wrap">
 
         <view class="user">
-          <image class="user-avatar" src="{{item.mblog.user.profile_image_url}}"></image>
+          <image class="user-avatar" bindtap="jumpTo" data-src="{{item.mblog.user.profile_url}}" src="{{item.mblog.user.profile_image_url}}"></image>
           <view class="user-info">
-            <text class="info-name">{{item.mblog.user.screen_name}}</text>
+            <view class="info-name" bindtap="jumpTo" data-src="{{item.mblog.user.profile_url}}">{{item.mblog.user.screen_name}}</view>
             <text class="info-mate-time">{{item.mblog.created_at}}</text>
           </view>
         </view>

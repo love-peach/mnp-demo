@@ -1,5 +1,4 @@
 /**app.wxss**/
-@import "weui.wxss";
 @import "font-din.wxss";
 
 /* reset */

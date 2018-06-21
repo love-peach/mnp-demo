@@ -2,7 +2,7 @@
     <!-- 顶部搜索条 start  -->
     <view class="search-bar">
       <view class="search-wrap">
-        <icon class="search-icon" type="search" size="16"></icon>
+        <image class="search-icon" src="/res/img/icon_search.png" />
         <input
           type="search"
           class="search-input"

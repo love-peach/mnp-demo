@@ -21,6 +21,8 @@
   font-size: 28rpx;
 }
 .search-wrap .search-icon {
+  height: 32rpx;
+  width: 32rpx;
   position: absolute;
   top: 50%;
   left: 20rpx;
@@ -52,8 +54,9 @@
   font-size:0;
 }
 .operation-del {
-  width: 46rpx;
-  height: 46rpx;
+  width: 24rpx;
+  height: 28rpx;
+  padding: 10rpx;
 }
 
 /* tag 样式 */

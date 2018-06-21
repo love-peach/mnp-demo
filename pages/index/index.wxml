@@ -3,7 +3,7 @@
   <!-- 顶部搜索条 start  -->
     <view class="search-wrap">
       <navigator class="search-link" url="/pages/search/search" hover-class="none">
-        <icon class="search-icon" type="search" size="16"></icon>
+        <image class="search-icon" src="/res/img/icon_search.png" />
         <text class="search-text">请输入数字货币名称</text>
       </navigator>
     </view>

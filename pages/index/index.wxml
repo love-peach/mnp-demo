@@ -11,20 +11,25 @@
 
 
   <!-- 列表 start  -->
-
   <view class="table-list">
     <!-- 列表头 -->
     <view class="tr table-head">
       <view class="th row-name">名称</view>
       <view class="th row-new">最新</view>
-      <view class="th row-change active descending">
+      <view
+        class="{{[(rankColumn === 'changeDay') ? rankTypes[rankIndex]: '','th row-change']}}"
+        bindtap="handleSwitchRank"
+        data-column-name="changeDay" >
         <text>涨跌</text>
         <view class="triangle-wrap">
           <view class="triangle triangle-top"></view>
           <view class="triangle triangle-bottom"></view>
         </view>
       </view>
-      <view class="th row-change-week active ascending">
+      <view
+        class="{{[(rankColumn === 'changeWeek') ? rankTypes[rankIndex]: '','th row-change-week']}}"
+        bindtap="handleSwitchRank"
+        data-column-name="changeWeek" >
         <text>七天涨跌</text>
         <view class="triangle-wrap">
           <view class="triangle triangle-top"></view>
@@ -34,7 +39,7 @@
     </view>
 
     <!-- 列表body -->
-    <navigator url="/pages/details/details?id={{index}}" wx:for="{{listData}}" wx:key="{{index}}">
+    <navigator url="/pages/details/details?searchWord={{item.name}}" wx:for="{{listData}}" wx:key="{{index}}">
       <view class="tr">
         <view class="td row-name">{{item.name}}</view>
         <view class="td row-new">

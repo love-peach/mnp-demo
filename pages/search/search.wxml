@@ -1,63 +1,83 @@
-<!-- 顶部搜索条 start  -->
-  <view class="search-wrap">
-    <icon class="search-icon" type="search" size="16"></icon>
-    <input type="search" class="search-input" placeholder-style="" placeholder="搜索" auto-focus />
-  </view>
-<!-- 顶部搜索条 end  -->
+<view class="container">
+    <!-- 顶部搜索条 start  -->
+    <view class="search-bar">
+      <view class="search-wrap">
+        <icon class="search-icon" type="search" size="16"></icon>
+        <input
+          type="search"
+          class="search-input"
+          placeholder-style="color: #728BAE;"
+          placeholder="请输入数字货币名称"
+          confirm-type="search"
+          focus
+          value="{{searchWord}}"
+          bindfocus="handleFocus"
+          bindblur="handleBlur"
+          bindinput="handleTyping"
+          bindconfirm="handleSearch"
+        />
+      </view>
+      <view wx:if="{{isFocus}}" class="search-btn" bindtap="handleCancel">取消</view>
+    </view>
+    <!-- 顶部搜索条 end  -->
 
-<!-- 候选词 start -->
-<view class="search-candidate-wrap">
-  <!-- 搜索历史 start -->
-  <view class="search-history">
-    <view class="search-title-bar">
-      <text class="title-text">搜索历史</text>
-      <view class="title-operation">
-        <image class="operation-del" src="/res/img/icon_delete.png"></image>
+  <!-- 候选词 start -->
+  <view class="search-candidate-wrap">
+    <!-- 搜索历史 start -->
+    <view wx:if="{{searchHistory.length > 0}}" class="search-history">
+      <view class="search-title-bar">
+        <text class="title-text">搜索历史</text>
+        <view class="title-operation">
+          <image
+            class="operation-del"
+            bindtap="handleCleanSearchHistory"
+            src="/res/img/icon_delete.png"
+          />
+        </view>
+      </view>
+
+      <view class="tag-container">
+        <block wx:for="{{searchHistory}}" wx:key="{{index}}">
+          <view class="tag-item-box">
+            <navigator url="/pages/details/details?searchWord={{item}}" hover-class="none" class="tag-wrap">
+              <text class="tag-text">{{item}}</text>
+              <!-- <text class="tag-close">×</text> -->
+            </navigator>
+          </view>
+        </block>
       </view>
     </view>
 
-    <view class="tag-container">
-      <block wx:for="{{searchHistory}}" wx:key="{{index}}">
-        <view class="tag-item-box">
-          <view class="tag-wrap">
-            <text class="tag-text">{{item}}</text>
-            <text class="tag-close">×</text>
+    <!-- 搜索历史 end -->
+
+
+    <!-- 热门币种 start -->
+    <view class="search-hot">
+
+      <view class="search-title-bar">
+        <text class="title-text">热门币种</text>
+      </view>
+
+      <view class="tag-container">
+        <block wx:for="{{hotCoins}}" wx:key="{{index}}">
+          <view class="tag-item-box">
+            <navigator url="/pages/details/details?searchWord={{item}}" hover-class="none" class="tag-wrap">
+              <text class="tag-text">{{item}}</text>
+              <!-- <text class="tag-close">×</text> -->
+            </navigator>
           </view>
-        </view>
-      </block>
+        </block>
+      </view>
+      
     </view>
+
+    <!-- 热门币种 end -->
+  </view>
+  <!-- 候选词 end -->
+
+  <!-- 搜索结果 start -->
+  <view class="search-result-wrap">
 
   </view>
-
-  <!-- 搜索历史 end -->
-
-
-  <!-- 热门币种 start -->
-  <view class="search-hot">
-
-    <view class="search-title-bar">
-      <text class="title-text">热门币种</text>
-    </view>
-
-    <view class="tag-container">
-      <block wx:for="{{searchHistory}}" wx:key="{{index}}">
-        <view class="tag-item-box">
-          <view class="tag-wrap">
-            <text class="tag-text">{{item}}</text>
-            <text class="tag-close">×</text>
-          </view>
-        </view>
-      </block>
-    </view>
-    
-  </view>
-
-  <!-- 热门币种 end -->
+  <!-- 搜索结果 end -->
 </view>
-<!-- 候选词 end -->
-
-<!-- 搜索结果 start -->
-<view class="search-result-wrap">
-
-</view>
-<!-- 搜索结果 end -->

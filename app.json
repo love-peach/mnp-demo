@@ -2,8 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/search/search",
     "pages/community/community",
+    "pages/search/search",
     "pages/details/details",
     "pages/web-view/web-view"
   ],

@@ -1,4 +1,5 @@
 /**index.wxss**/
+
 /* 搜索条按钮样式 */
 .search-wrap {
   padding: 20rpx 30rpx;

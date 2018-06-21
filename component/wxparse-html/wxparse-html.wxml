@@ -21,9 +21,7 @@
     <text
       class="wxParse-a"
       bindtap="wxParseTagATap"
-      data-src="{{blogData.retweeted_status.user.profile_url}}">
-      @{{blogData.retweeted_status.user.screen_name}}: 
-    </text>
+      data-src="{{blogData.retweeted_status.user.profile_url}}">@{{blogData.retweeted_status.user.screen_name}}: </text>
     <template is="wxParse" data="{{wxParseData:blogRetweet.nodes}}"/>
     <block wx:if="{{blogData.retweeted_status.pics}}" >
       <template is="wxParse" data="{{wxParseData:blogRetweetPics.nodes}}"/>

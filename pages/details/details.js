@@ -32,7 +32,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage(res) {
-    console.log(res, 'res');
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
@@ -94,6 +93,7 @@ Page({
       srcOg = 'https://m.weibo.cn' + srcOg;
     }
     var srcNew = srcOg.replace(/\?/ig, '&');
+    console.log(srcNew, 'srcNew')
     wx.navigateTo({
       url: `/pages/web-view/web-view?url=${srcNew}`
     });

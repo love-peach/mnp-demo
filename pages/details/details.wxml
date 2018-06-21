@@ -10,7 +10,7 @@
     <view class="info-sub">
       <view class="sub-item">
         <text class="item-title">涨跌</text>
-        <text class="item-data">+1.98%</text>
+        <text class="item-data item-data-negative">+1.98%</text>
       </view>
       <view class="sub-item">
         <text class="item-title">总市值</text>
@@ -18,7 +18,7 @@
       </view>
       <view class="sub-item">
         <text class="item-title">7天涨跌</text>
-        <text class="item-data">+1.98%</text>
+        <text class="item-data item-data-positive">+1.98%</text>
       </view>
       <view class="sub-item">
         <text class="item-title">流通市值</text>
@@ -35,28 +35,26 @@
       <view class="discuss-item-wrap">
 
         <view class="user">
-          <image class="user-avatar" bindtap="jumpTo" data-src="{{item.mblog.user.profile_url}}" src="{{item.mblog.user.profile_image_url}}"></image>
+          <image
+            class="user-avatar"
+            bindtap="jumpTo"
+            data-src="{{item.mblog.user.profile_url}}"
+            src="{{item.mblog.user.profile_image_url}}"
+          />
           <view class="user-info">
-            <view class="info-name" bindtap="jumpTo" data-src="{{item.mblog.user.profile_url}}">{{item.mblog.user.screen_name}}</view>
+            <view
+              class="info-name"
+              bindtap="jumpTo"
+              data-src="{{item.mblog.user.profile_url}}">
+              {{item.mblog.user.screen_name}}
+            </view>
             <text class="info-mate-time">{{item.mblog.created_at}}</text>
           </view>
         </view>
-
         <view class="content">
-          
-            <!-- <template is="wxParse" data="{{wxParseData:dkcontent.nodes}}"/> -->
-
-
-             <wxparse-html blogData="{{item.mblog}}"></wxparse-html>
-            
-          <!-- <text class="content-text">{{item.mblog.text}}</text> -->
-
+            <wxparse-html blogData="{{item.mblog}}" blogOgUrl="{{item.scheme}}"></wxparse-html>
         </view>
-
       </view>
-
     </block>
-
   </view>
-  
 </view>

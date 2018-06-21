@@ -12,7 +12,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options, 'options');
     let searchArr = [];
     let searchStr = '';
     for (let key in options) {
@@ -22,9 +21,9 @@ Page({
       }
     }
     searchStr = '?' + searchArr.join('&');
-    console.log(options.url + searchStr, '00')
     this.setData({
       webUrl: options.url + searchStr,
+      options: options,
       // webUrl: 'https://mp.weixin.qq.com/s/oOAOUxD4ZQhmUCWIkR207Q'
     });
   },
@@ -74,7 +73,15 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (e) {
+    const { webUrl } = this.data;
+    const srcNew = webUrl.replace(/\?/ig, '&');
+    if (e.from === 'button') {
+      console.log(e.target)
+    }
+    return {
+      title: '币发-web-view',
+      path: `/pages/web-view/web-view?url=${srcNew}`
+    }
   }
 })

@@ -1,7 +1,8 @@
 let WxParse = require("../../wxParse/wxParse.js");
 Component({
   properties: {
-    blogData: Object
+    blogData: Object,
+    blogOgUrl: String
   },
   ready: function() {
     const that = this;

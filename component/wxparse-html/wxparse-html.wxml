@@ -1,18 +1,33 @@
 <import src="/wxParse/wxParse.wxml"/>
 
 <view class="wxparse-html-wrap">
-  <view wx:if="{{blogData.text}}" class="blog-origin">
+
+  <view
+    wx:if="{{blogData.text}}"
+    data-src="{{blogOgUrl}}"
+    bindtap="wxParseTagATap"
+    class="blog-origin">
     <template is="wxParse" data="{{wxParseData:blogOrigin.nodes}}"/>
     <block wx:if="{{blogData.pics}}" >
       <template is="wxParse" data="{{wxParseData:blogOriginPics.nodes}}"/>
     </block>
   </view>
 
-  <view wx:if="{{blogData.retweeted_status}}" class="blog-retweet">
-    <text class="wxParse-a" bindtap="wxParseTagATap" data-src="{{blogData.retweeted_status.user.profile_url}}">@{{blogData.retweeted_status.user.screen_name}}: </text>
+  <view 
+    wx:if="{{blogData.retweeted_status}}"
+    data-src="{{'https://m.weibo.cn/status/' + blogData.retweeted_status.mid}}"
+    bindtap="wxParseTagATap"
+    class="blog-retweet">
+    <text
+      class="wxParse-a"
+      bindtap="wxParseTagATap"
+      data-src="{{blogData.retweeted_status.user.profile_url}}">
+      @{{blogData.retweeted_status.user.screen_name}}: 
+    </text>
     <template is="wxParse" data="{{wxParseData:blogRetweet.nodes}}"/>
     <block wx:if="{{blogData.retweeted_status.pics}}" >
       <template is="wxParse" data="{{wxParseData:blogRetweetPics.nodes}}"/>
     </block>
   </view>
+
 </view>

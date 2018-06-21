@@ -38,7 +38,17 @@
   margin: 5rpx 0;
 }
 .info-sub .item-title {
-  color: #999;
+  color: #9B9B9B;
+}
+.info-sub .item-data {
+  color: #191919;
+  font-weight: 500;
+}
+.info-sub .item-data-positive {
+  color: #019802;
+}
+.info-sub .item-data-negative {
+  color: #E93030;
 }
 /*=========================== 概览样式 end  ===========================*/
 

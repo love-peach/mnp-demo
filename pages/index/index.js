@@ -14,7 +14,7 @@ Page({
     listDataParams: {
       content: '',
       sort: 0,
-      sortType: '',
+      sortType: 5,
       limit: 20,
       start: 1,
       exchange: '',
@@ -80,12 +80,28 @@ Page({
     const { rankIndex, rankColumn } = this.data;
     const { columnName } = e.currentTarget.dataset;
     const rankIndexNew = columnName === rankColumn ? (rankIndex + 1) % 3 : 0;
+    const rankSort = rankIndexNew === 0 ? -1 : (rankIndexNew === 1 ? 1 : 0);
+    let rankSortType = 5
+    switch (columnName) {
+      case 'changeDay':
+        rankSortType = 4;
+        break;
+      case 'changeWeek':
+        rankSortType = 3;
+        break;
+      default:
+        rankSortType = 5;
+    }
+    if (rankSort === 0) {
+      rankSortType = 5;
+    }
+
     this.setData({
       rankColumn: columnName,
       rankIndex: rankIndexNew,
       'listDataParams.start': 1,
-      'listDataParams.sort': rankIndexNew === 0 ? -1 : (rankIndexNew === 1 ? 1 : 0),
-      'listDataParams.sortType': columnName === 'changeDay' ? 4 : 3
+      'listDataParams.sort': rankSort,
+      'listDataParams.sortType': rankSortType
     });
     this.requestListData();
   },

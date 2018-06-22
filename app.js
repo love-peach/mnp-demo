@@ -11,6 +11,6 @@ App({
   },
   globalData: {
     hasLogin: false,
-    apiUrl: 'http://app.diyli.cn'
+    apiUrl: 'https://app.diyli.cn'
   }
 })

@@ -3,9 +3,14 @@
 }
 /* 搜索条按钮样式 */
 .search-bar {
-  padding: 20rpx 30rpx 0;
+  padding: 20rpx 30rpx 30rpx;
   display: flex;
   align-items: center;
+  position:fixed;
+  right:0;
+  left:0;
+  background-color:#fff;
+
 }
 .search-wrap {
   flex: 1;
@@ -38,7 +43,7 @@
 
 /* 候选词样式 */
 .search-candidate-wrap {
-  padding: 0 30rpx;
+  padding: 110rpx 30rpx 0;
 }
 
 .search-title-bar {
@@ -93,12 +98,33 @@
 }
 /* 搜索历史样式 */
 .search-history {
-  margin-top: 30rpx;
+   margin-bottom: 30rpx; 
 }
 
 /* 热门币种样式  */
 .search-hot {
-  margin-top: 30rpx;
+  /* margin-top: 30rpx; */
 }
 
 /* 搜索结果 */
+.search-result-wrap {
+  padding-top: 110rpx;
+}
+
+/* 搜索结果 空样式 */
+.search-empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F3F6FA;
+}
+.search-empty .empty-img {
+  width: 300rpx;
+  height: 300rpx;
+}
+.search-empty .empty-text {
+  font-size: 28rpx;
+  color: #48668F;
+}

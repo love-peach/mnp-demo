@@ -1,3 +1,5 @@
+<import src="../../template/list-item.wxml"/>
+
 <view class="container">
     <!-- 顶部搜索条 start  -->
     <view class="search-bar">
@@ -21,8 +23,10 @@
     </view>
     <!-- 顶部搜索条 end  -->
 
-  <!-- 候选词 start -->
-  <view class="search-candidate-wrap">
+  <!-- 快速搜索候选词条 start -->
+  <view
+    wx:if="{{searchResult.length === 0 && !isEmptySearchResult}}"
+    class="search-candidate-wrap">
     <!-- 搜索历史 start -->
     <view wx:if="{{searchHistory.length > 0}}" class="search-history">
       <view class="search-title-bar">
@@ -35,11 +39,13 @@
           />
         </view>
       </view>
-
       <view class="tag-container">
         <block wx:for="{{searchHistory}}" wx:key="{{index}}">
           <view class="tag-item-box">
-            <navigator url="/pages/details/details?searchWord={{item}}" hover-class="none" class="tag-wrap">
+            <navigator
+              class="tag-wrap"
+              url="/pages/details/details?searchWord={{item}}"
+              hover-class="none" >
               <text class="tag-text">{{item}}</text>
               <!-- <text class="tag-close">×</text> -->
             </navigator>
@@ -47,37 +53,43 @@
         </block>
       </view>
     </view>
-
     <!-- 搜索历史 end -->
-
 
     <!-- 热门币种 start -->
     <view class="search-hot">
-
       <view class="search-title-bar">
         <text class="title-text">热门币种</text>
       </view>
-
       <view class="tag-container">
         <block wx:for="{{hotCoins}}" wx:key="{{index}}">
           <view class="tag-item-box">
-            <navigator url="/pages/details/details?searchWord={{item}}" hover-class="none" class="tag-wrap">
+            <navigator
+              class="tag-wrap"
+              url="/pages/details/details?searchWord={{item}}"
+              hover-class="none">
               <text class="tag-text">{{item}}</text>
               <!-- <text class="tag-close">×</text> -->
             </navigator>
           </view>
         </block>
       </view>
-      
     </view>
-
     <!-- 热门币种 end -->
   </view>
-  <!-- 候选词 end -->
+  <!-- 快速搜索候选词条 end -->
+
+  <block wx:if="{{searchResult.length === 0 && isEmptySearchResult}}">
+    <view class="search-empty">
+      <image class="empty-img" src="/res/img/search_empty.png" />
+      <text class="empty-text">暂无数据</text>
+    </view>
+  </block>
 
   <!-- 搜索结果 start -->
-  <view class="search-result-wrap">
-
+  <view wx:if="{{searchResult.length > 0}}" class="search-result-wrap table-list">
+    <block wx:for="{{searchResult}}" wx:key="{{index}}">
+      <template is="list-item" data="{{itemData: item}}"/>
+    </block>
   </view>
   <!-- 搜索结果 end -->
 </view>

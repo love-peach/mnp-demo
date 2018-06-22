@@ -1,22 +1,31 @@
 const app = getApp()
-
+import util from '../../utils/util.js';
+const apiUrl = app.globalData.apiUrl;
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    flag: true,
     rankColumn: '',
     rankTypes: ['descending', 'ascending', ''],
     rankIndex: 0,
-    listData: [
-      { "name": "TRUE", "new": "16850.00", "change": "3.03%", "changeWeek": "1%" },
-      { "name": "BTC", "new": "6850.00", "change": "3.03%", "changeWeek": "0%" },
-      { "name": "BTC", "new": "850.00", "change": "3.03%", "changeWeek": "12.98%" },
-      { "name": "BTC", "new": "50.00", "change": "30.03%", "changeWeek": "20%" },
-      { "name": "BTC", "new": "0.01", "change": "3.03%", "changeWeek": "90.90%" },
-    ]
+    listData: [],
+    listDataParams: {
+      content: '',
+      sort: 0,
+      sortType: '',
+      limit: 20,
+      start: 1,
+      exchange: '',
+    },
+  }, 
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.requestListData();
   },
 
   /**
@@ -39,20 +48,30 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    setTimeout(function() {
+    this.setData({
+      'listDataParams.start': 1
+    });
+    this.requestListData(null, function () {
       wx.stopPullDownRefresh();
-    }, 800)
-    // wx.request({
-    //   url: '',
-    //   data: {},
-    //   method: 'GET',
-    //   success: function (res) { },
-    //   fail: function (res) { },
-    //   complete: function (res) {
-    //     wx.stopPullDownRefresh();
-    //   }
-    // })
+    });
   },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+    const { listDataParams } = this.data;
+    this.setData({
+      'listDataParams.start': listDataParams.start + 1
+    });
+    wx.showLoading({
+      title: '玩命加载中',
+    });
+    const that = this;
+    this.requestListData(null, function() {
+      wx.hideLoading();
+    });
+  }, 
 
   /**
    * 切换排序
@@ -60,20 +79,47 @@ Page({
   handleSwitchRank(e) {
     const { rankIndex, rankColumn } = this.data;
     const { columnName } = e.currentTarget.dataset;
+    const rankIndexNew = columnName === rankColumn ? (rankIndex + 1) % 3 : 0;
     this.setData({
       rankColumn: columnName,
-      rankIndex: columnName === rankColumn ? (rankIndex + 1) % 3 : 0
+      rankIndex: rankIndexNew,
+      'listDataParams.start': 1,
+      'listDataParams.sort': rankIndexNew === 0 ? -1 : (rankIndexNew === 1 ? 1 : 0),
+      'listDataParams.sortType': columnName === 'changeDay' ? 4 : 3
     });
+    this.requestListData();
+  },
 
-    // wx.request({
-    //   url: '',
-    //   data: {},
-    //   method: 'GET',
-    //   success: function (res) { },
-    //   fail: function (res) { },
-    //   complete: function (res) {
-    //     wx.stopPullDownRefresh();
-    //   }
-    // })
+  /**
+   * 请求数据
+   */
+  requestListData(params, callback) {
+    const paramsObj = params ? params : this.data.listDataParams;
+    let listData = [];
+    console.log(paramsObj, 'paramsObj');
+    const that = this;
+    wx.request({
+      url: apiUrl + '/b/a/coin/search',
+      data: paramsObj,
+      method: 'GET',
+      success: function (res) {
+        res.data.data.forEach(item => {
+          item.base = item.base.toUpperCase();
+          item.rateStrIsDown = item.rateStr.indexOf('-') > -1;
+          item.closeToFixed = util.getFloat(item.close, 8);
+          item.closeCnyToFixed = util.getFloat(item.closeCny, 8);
+        })
+        if (paramsObj.start === 1) {
+          listData = [].concat(res.data.data);
+        } else {
+          listData = that.data.listData.concat(res.data.data);
+        }
+        that.setData({
+          listData: listData
+        });
+        callback && callback();
+      },
+      fail: function (res) { },
+    })
   }
 });

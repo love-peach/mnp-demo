@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "行情",
   "enablePullDownRefresh": true,
+  "onReachBottomDistance": 100,
   "usingComponents": {
     "search-bar": "/component/search-bar/search-bar"
   }

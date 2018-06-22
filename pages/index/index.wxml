@@ -1,14 +1,15 @@
+<import src="../../template/list-item.wxml"/>
+
 <view class="container">
 
   <!-- 顶部搜索条 start  -->
-    <view class="search-wrap">
-      <navigator class="search-link" url="/pages/search/search" hover-class="none">
-        <image class="search-icon" src="/res/img/icon_search.png" />
-        <text class="search-text">请输入数字货币名称</text>
-      </navigator>
-    </view>
+  <view class="search-wrap">
+    <navigator class="search-link" url="/pages/search/search" hover-class="none">
+      <image class="search-icon" src="/res/img/icon_search.png" />
+      <text class="search-text">请输入数字货币名称</text>
+    </navigator>
+  </view>
   <!-- 顶部搜索条 end  -->
-
 
   <!-- 列表 start  -->
   <view class="table-list">
@@ -39,21 +40,9 @@
     </view>
 
     <!-- 列表body -->
-    <navigator url="/pages/details/details?searchWord={{item.name}}" wx:for="{{listData}}" wx:key="{{index}}">
-      <view class="tr">
-        <view class="td row-name">{{item.name}}</view>
-        <view class="td row-new">
-          <view class="price-main">{{item.new}}</view>
-          <view class="price-sub">{{item.new}}</view>
-        </view>
-        <view class="td row-change">
-          <view class="card card-positive">{{item.change}}</view>
-        </view>
-        <view class="td row-change-week">
-          <view class="card card-negative">{{item.changeWeek}}</view>
-        </view>
-      </view>
-    </navigator>
+    <block wx:for="{{listData}}" wx:key="{{index}}">
+      <template is="list-item" data="{{itemData: item}}"/>
+    </block>
 
   </view>
 </view>

@@ -1,4 +1,6 @@
-const app = getApp()
+const app = getApp();
+import util from '../../utils/util.js';
+const apiUrl = app.globalData.apiUrl;
 
 Page({
   /**
@@ -6,9 +8,23 @@ Page({
    */
   data: {
     searchHistory: [],
-    hotCoins: ['EOS', 'btn', 'ela', 'elf', 'btc', 'ltc', 'xrp'],
+    hotCoins: [],
     isFocus: true,
-    searchWord: ''
+    searchWord: '',
+    isEmptySearchResult: false,
+    searchResult: [],
+    searchResultParams: {
+      content: '',
+      sort: 0,
+      sortType: '',
+      limit: 20,
+      start: 1,
+      exchange: '',
+    },
+  },
+
+  onLoad() {
+    this.requestHotCoins();
   },
 
   /**
@@ -51,6 +67,7 @@ Page({
     const searchValue = e.detail.value;
     this.setData({
       searchWord: searchValue,
+      'searchResultParams.content': searchValue
     })
   },
 
@@ -62,39 +79,32 @@ Page({
     if (!searchWord) {
       return false;
     }
-    this.setSearchHistory();
-    wx.navigateTo({
-      url: `/pages/details/details?searchWord=${this.data.searchWord}`,
+    const that = this;
+    this.requestSearchResult(null, function(res) {
+      if(res.length > 0) {
+        that.setSearchHistory();
+        that.setData({
+          isEmptySearchResult: false
+        });
+      } else {
+        that.setData({
+          isEmptySearchResult: true
+        });
+        console.log('暂无数据')
+      }
     });
-    // wx.request({
-    //   url: '',
-    //   data: {},
-    //   method: 'GET',
-    //   success: function (res) { },
-    //   fail: function (res) { },
-    //   complete: function (res) {
-    //     wx.stopPullDownRefresh();
-    //   }
-    // })
   },
 
   /**
    * 输入框事件--取消
    */
   handleCancel(e) {
-    this.clearInput();
     this.setData({
-      isFocus: false
+      searchWord: "",
+      isFocus: false,
+      searchResult: [],
+      isEmptySearchResult: false
     })
-  },
-
-  /**
-   * 输入框事件--清空输入框值
-   */
-  clearInput: function () {
-    this.setData({
-      searchWord: ""
-    });
   },
 
   /**
@@ -109,7 +119,10 @@ Page({
     wx.setStorage({
       key: "searchHistory",
       data: historyNew
-    })
+    });
+    this.setData({
+      searchHistory: historyNew
+    });
   },
   
   /**
@@ -122,5 +135,59 @@ Page({
     wx.removeStorage({
       key: 'searchHistory',
     })
-  }
+  },
+
+  /**
+   * 请求热门币种
+   */
+  requestHotCoins() {
+    const that = this;
+    wx.request({
+      url: apiUrl + '/b/a/coin/hot',
+      method: 'GET',
+      success: function (res) {
+        that.setData({
+          hotCoins: res.data.data
+        });
+      },
+      fail: function (res) { },
+    })
+  },
+
+  /**
+   * 请求搜索数据
+   */
+  requestSearchResult(params, callback) {
+    const paramsObj = params ? params : this.data.searchResultParams;
+    let searchResult = [];
+    console.log(paramsObj, 'paramsObj');
+    const that = this;
+    wx.request({
+      url: apiUrl + '/b/a/coin/search',
+      data: paramsObj,
+      method: 'GET',
+      success: function (res) {
+        res.data.data.forEach(item => {
+          item.base = item.base.toUpperCase();
+          item.rateStrIsDown = item.rateStr.indexOf('-') > -1;
+          item.closeToFixed = util.getFloat(item.close, 8);
+          item.closeCnyToFixed = util.getFloat(item.closeCny, 8);
+        })
+        if (paramsObj.start === 1) {
+          searchResult = [].concat(res.data.data);
+        } else {
+          searchResult = that.data.searchResult.concat(res.data.data);
+        }
+        that.setData({
+          searchResult: searchResult
+        });
+        callback && callback(res.data.data);
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '请求出粗，请重新尝试',
+        })
+      },
+    })
+  },
 });

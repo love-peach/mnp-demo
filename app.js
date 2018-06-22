@@ -10,6 +10,7 @@ App({
     console.log('App Hide')
   },
   globalData: {
-    hasLogin: false
+    hasLogin: false,
+    apiUrl: 'http://app.diyli.cn'
   }
 })

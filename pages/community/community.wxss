@@ -1,11 +1,14 @@
 .container {
   background-color: #fff;
   color: #4A4A4A;
-  text-align: center
+  text-align: center;
+  border-top:1px solid #EAEDF3;
+  box-sizing: border-box;
 }
 .text-title {
-  margin-top: 60rpx;
-  text-align: center;
+  width: 580rpx;
+  margin: 60rpx auto 0;
+  text-align: left;
   font-size: 32rpx;
   font-weight: 500;
   color: #4A4A4A;

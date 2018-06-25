@@ -1,17 +1,18 @@
 <view class="container">
   <view class="text-title">
-    <text>请扫描下方二维码加入我们的币发社区</text>
+    <view>你好，欢迎加入币发社群，与我们建立更深的连接，共享收益</view>
+    <view>群里有已实战翻多倍的大牛和专门的数据团队为你提供专业数据分析服务</view>
   </view>
 
   <image bindtap="previewImg" bindlongpress="longpress" class="qrcode-img" data-src="https://berich.io/dist/img/qrcode.jpg" src="/res/img/qrcode.png"></image>
 
   <view class="text-tip">
     <text class="tip-item">群里有已实战翻多倍的大牛</text>
-    <text class="tip-item">和专门的数据团</text>
+    <text class="tip-item">和专门的数据团队</text>
     <text class="tip-item">为你提供专业数据分析服务</text>
   </view>
 
   <view class="text-bottom">
-    <text>与我们建立更深的l连接，共建社区</text>
+    <text>与我们建立更深的连接，共建社区</text>
   </view>
 </view>

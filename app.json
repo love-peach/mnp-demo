@@ -8,6 +8,7 @@
     "pages/web-view/web-view"
   ],
   "window": {
+    "backgroundColor": "#F3F6FA",
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
@@ -17,6 +18,7 @@
     "position": "bottom",
     "backgroundColor": "#fff",
     "color": "#333",
+    "borderStyle": "white",
     "selectedColor": "#426AB3",
     "list": [
       {

@@ -27,16 +27,6 @@
           <view class="triangle triangle-bottom"></view>
         </view>
       </view>
-      <view
-        class="{{[(rankColumn === 'changeWeek') ? rankTypes[rankIndex]: '','th row-change-week']}}"
-        bindtap="handleSwitchRank"
-        data-column-name="changeWeek" >
-        <text>七天涨跌</text>
-        <view class="triangle-wrap">
-          <view class="triangle triangle-top"></view>
-          <view class="triangle triangle-bottom"></view>
-        </view>
-      </view>
     </view>
 
     <!-- 列表body -->

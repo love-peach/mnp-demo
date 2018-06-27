@@ -20,6 +20,10 @@ page {
   background-color: #F3F6FA;
 }
 
+.navigator-hover {
+    opacity: 1;
+    background-color: #e2ebf7;
+}
 /* ============================ 列表样式 START ============================ */
 .table-list {
   font-size: 32rpx;
@@ -31,15 +35,18 @@ page {
   justify-content: center;
   align-items: center;
   border-bottom: 1rpx solid #F3F6FA;
-  padding: 0 14rpx;
+  padding: 0 6rpx;
 }
 .table-list .table-head{
   font-size: 24rpx;
   border-bottom: 1rpx solid #EAEDF3;
 }
-.table-list .table-head .th{
+.table-list .th{
   padding: 10rpx 20rpx;
   color: #4A4A4A;
+}
+.table-list .td {
+  padding: 20rpx;
 }
 
 /* 不同数据给不同宽度 */
@@ -47,8 +54,9 @@ page {
   flex-basis: 90rpx;
 }
 .table-list .row-new {
-  text-align: center; 
+  text-align: right; 
   flex: 1;
+  padding-right: 40rpx;
 }
 .table-list .row-change {
   text-align: center; 
@@ -59,16 +67,10 @@ page {
   flex-basis: 150rpx;
 }
 
-.table-list .td {
-  padding: 20rpx;
-}
+
 .table-list .td.row-name {
   font-weight: 500;
   text-transform: uppercase;
-}
-.table-list .td.row-new {
-  text-align: right;
-  padding-right: 30rpx;
 }
 
 .table-list .td .price-main {

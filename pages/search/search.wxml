@@ -45,7 +45,7 @@
             <navigator
               class="tag-wrap"
               url="/pages/details/details?searchWord={{item}}"
-              hover-class="none" >
+              hover-class="none">
               <text class="tag-text">{{item}}</text>
               <!-- <text class="tag-close">×</text> -->
             </navigator>

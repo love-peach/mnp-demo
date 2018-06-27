@@ -2,7 +2,7 @@
 
 /* 搜索条按钮样式 */
 .search-wrap {
-  padding: 20rpx 30rpx;
+  padding: 20rpx 26rpx;
   background-color: #fff; 
 }
 .search-link {

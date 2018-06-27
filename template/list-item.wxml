@@ -1,5 +1,8 @@
 <template name="list-item">
-  <navigator url="/pages/details/details?searchWord={{itemData.base}}">
+  <navigator
+    url="/pages/details/details?searchWord={{itemData.base}}"
+    hover-class="navigator-hover"
+    >
     <view class="tr">
       <view class="td row-name">{{itemData.base}}</view>
       <view class="td row-new">
@@ -7,9 +10,6 @@
         <view class="price-sub">{{itemData.closeCnyToFixed}}</view>
       </view>
       <view class="td row-change">
-        <view class="{{[itemData.rateStrIsDown ? 'card-negative' : 'card-positive', 'card']}}">{{itemData.rateStr}}</view>
-      </view>
-      <view class="td row-change-week">
         <view class="{{[itemData.rateStrIsDown ? 'card-negative' : 'card-positive', 'card']}}">{{itemData.rateStr}}</view>
       </view>
     </view>

@@ -75,8 +75,8 @@
 }
 .user {
   display: flex;
-  padding-right: 30rpx;
-  padding-left: 30rpx;
+  padding-right: 26rpx;
+  padding-left: 26rpx;
 }
 .user .user-avatar {
   height: 80rpx;

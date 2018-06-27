@@ -15,12 +15,12 @@
   height: 32rpx !important;
 }
 .blog-origin {
-  padding-right: 30rpx;
-  padding-left: 30rpx;
+  padding-right: 26rpx;
+  padding-left: 26rpx;
   background-color: #fff;
 }
 .blog-retweet {
-  padding: 30rpx;
+  padding: 26rpx;
   background-color: #F3F6FA;
 }
 
@@ -28,15 +28,15 @@
 .img-list-wrap {
   font-size: 0;
   margin-top: 20rpx;
-  margin-left: -8rpx;
-  margin-right: -8rpx;
+  margin-left: -10rpx;
+  margin-right: -10rpx;
   margin-bottom: -16rpx;
 }
 .img-list-wrap .img-list-item {
   display: inline-block;
-  padding-right: 8rpx;
-  padding-left: 8rpx;
-  margin-bottom: 16rpx;
+  padding-right: 10rpx;
+  padding-left: 10rpx;
+  margin-bottom: 20rpx;
   width: 33.33%;
   box-sizing: border-box;
 }

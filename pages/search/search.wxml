@@ -19,7 +19,7 @@
           bindconfirm="handleSearch"
         />
       </view>
-      <view wx:if="{{isFocus}}" class="search-btn" bindtap="handleCancel">取消</view>
+      <view class="search-btn" bindtap="handleCancel">取消</view>
     </view>
     <!-- 顶部搜索条 end  -->
 

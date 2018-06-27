@@ -104,6 +104,9 @@ Page({
       isFocus: false,
       searchResult: [],
       isEmptySearchResult: false
+    });
+    wx.navigateBack({
+      delta: 1
     })
   },
 

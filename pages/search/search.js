@@ -200,7 +200,7 @@ Page({
         that.setData({
           searchResult: searchResult
         });
-        callback && callback(res.data.data.list);
+        callback && callback(res.data.list);
         wx.hideLoading();
       })
       .catch(err => {

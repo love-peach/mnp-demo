@@ -189,8 +189,8 @@ Page({
           item.base = item.base.toUpperCase();
           item.rateStrFormat = util.getFloat(item.rateStr.slice(0, -1), 2).toFixed(2) + '%';
           item.rateStrIsDown = item.rateStr.indexOf('-') > -1;
-          item.closeToFixed = util.getFloat(item.close, 8);
-          item.closeCnyToFixed = util.getFloat(item.closeCny, 8);
+          item.closeToFixed = util.NumberLimit(item.close);
+          item.closeCnyToFixed = util.NumberLimit(item.closeCny);
         })
         if (paramsObj.start === 1) {
           searchResult = [].concat(res.data.list);

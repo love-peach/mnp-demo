@@ -21,7 +21,29 @@ const getFloat = function (number, n) {
   return number;
 };
 
+const NumberLimit = (number, len = 6) => {
+  if (!number && number !== 0) return '';
+  if (!parseFloat(number)) return number;
+  number = parseFloat(number);
+  let result = number.toString();
+  const isChange = number > 0 && number < 0.000001;
+  if (isChange) { // <0.000001时 为科学计数法
+    if (number < 0.0000000000000009) return number; // < 0.0000000000000009 时精度出现问题
+    result = (number + 1).toString().split('.')[1];
+    result = '0.' + result;
+  }
+
+  if (result.length <= len) return result;
+  for (let i = 0; i <= result.length; i++) {
+    result = number.toFixed(i);
+    if (result != 0 && result.length >= len + 1) {
+      return result;
+    }
+  }
+};
+
 module.exports = {
   formatTime: formatTime,
-  getFloat: getFloat
+  getFloat: getFloat,
+  NumberLimit: NumberLimit
 }

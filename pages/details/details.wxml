@@ -52,7 +52,7 @@
           </view>
         </view>
         <view class="content">
-            <wxparse-html blogData="{{item.mblog}}" blogOgUrl="{{item.scheme}}"></wxparse-html>
+            <wxparse-html blogData="{{item.mblog}}" blogOgUrl="{{item.mblog.scheme}}"></wxparse-html>
         </view>
       </view>
     </block>

@@ -4,25 +4,25 @@
   <!-- 概览 -->
   <view class="overview">
     <view class="info-main">
-      <text class="price-main">$69803.09</text>
-      <text class="price-sub">￥1903.52</text>
+      <text class="price-main">${{closeToFixed}}</text>
+      <text class="price-sub">￥{{closeCnyToFixed}}</text>
     </view>
     <view class="info-sub">
       <view class="sub-item">
         <text class="item-title">涨跌</text>
-        <text class="item-data item-data-negative">+1.98%</text>
+        <view class="{{[rateStrIsDown ? 'item-data-negative' : 'item-data-positive',  'item-data']}}">{{rateStrFormat}}</view>
       </view>
       <view class="sub-item">
-        <text class="item-title">总市值</text>
-        <text class="item-data">+1.98%</text>
-      </view>
-      <view class="sub-item">
-        <text class="item-title">7天涨跌</text>
-        <text class="item-data item-data-positive">+1.98%</text>
+        <text class="item-title">发行总量</text>
+        <text class="item-data">{{coinData.maxSupply}}</text>
       </view>
       <view class="sub-item">
         <text class="item-title">流通市值</text>
-        <text class="item-data">+1.98%</text>
+        <text class="item-data">￥{{coinData.circulationMarketValue}}</text>
+      </view>
+      <view class="sub-item">
+        <text class="item-title">流通数量</text>
+        <text class="item-data">{{coinData.countCapFormat}}</text>
       </view>
     </view>
   </view>

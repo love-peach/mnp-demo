@@ -19,7 +19,7 @@
           bindconfirm="handleSearch"
         />
       </view>
-      <view class="search-btn" bindtap="handleCancel">取消</view>
+      <view wx:if="{{isFocus}}" class="search-btn" bindtap="handleCancel">取消</view>
     </view>
     <!-- 顶部搜索条 end  -->
 
@@ -42,13 +42,15 @@
       <view class="tag-container">
         <block wx:for="{{searchHistory}}" wx:key="{{index}}">
           <view class="tag-item-box">
-            <navigator
+            <view
+              data-search-word="{{item}}"
+              bindtap="handelSearch"
               class="tag-wrap"
               url="/pages/details/details?searchWord={{item}}"
               hover-class="none">
               <text class="tag-text">{{item}}</text>
               <!-- <text class="tag-close">×</text> -->
-            </navigator>
+            </view>
           </view>
         </block>
       </view>
@@ -63,13 +65,15 @@
       <view class="tag-container">
         <block wx:for="{{hotCoins}}" wx:key="{{index}}">
           <view class="tag-item-box">
-            <navigator
+            <view
+              data-search-word="{{item}}"
+              bindtap="handelSearch"
               class="tag-wrap"
               url="/pages/details/details?searchWord={{item}}"
               hover-class="none">
               <text class="tag-text">{{item}}</text>
               <!-- <text class="tag-close">×</text> -->
-            </navigator>
+            </view>
           </view>
         </block>
       </view>

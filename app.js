@@ -11,6 +11,7 @@ App({
   },
   globalData: {
     hasLogin: false,
-    apiUrl: 'https://app.diyli.cn'
+    // apiUrl: 'https://app.diyli.cn',
+    apiUrl: 'http://172.29.30.31:8101'
   }
 })

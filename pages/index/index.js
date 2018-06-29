@@ -1,5 +1,6 @@
 const app = getApp()
 import util from '../../utils/util.js';
+import http from '../../utils/http.js';
 const apiUrl = app.globalData.apiUrl;
 
 Page({
@@ -12,12 +13,11 @@ Page({
     rankIndex: 0,
     listData: [],
     listDataParams: {
-      content: '',
-      sort: 0,
+      symbol: '',
+      sort: -1,
       sortType: 5,
       limit: 20,
-      start: 1,
-      exchange: '',
+      start: 1
     },
   }, 
 
@@ -60,17 +60,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-    const { listDataParams } = this.data;
+    const { limit, start } = this.data.listDataParams;
     this.setData({
-      'listDataParams.start': listDataParams.start + 1
-    });
-    wx.showLoading({
-      title: '玩命加载中',
+      'listDataParams.start': start + limit
     });
     const that = this;
-    this.requestListData(null, function() {
-      wx.hideLoading();
-    });
+    this.requestListData();
   }, 
 
   /**
@@ -80,7 +75,7 @@ Page({
     const { rankIndex, rankColumn } = this.data;
     const { columnName } = e.currentTarget.dataset;
     const rankIndexNew = columnName === rankColumn ? (rankIndex + 1) % 3 : 0;
-    const rankSort = rankIndexNew === 0 ? -1 : (rankIndexNew === 1 ? 1 : 0);
+    let rankSort = rankIndexNew === 0 ? -1 : (rankIndexNew === 1 ? 1 : 0);
     let rankSortType = 5
     switch (columnName) {
       case 'changeDay':
@@ -92,9 +87,12 @@ Page({
       default:
         rankSortType = 5;
     }
+
     if (rankSort === 0) {
+      rankSort = -1
       rankSortType = 5;
     }
+  
 
     this.setData({
       rankColumn: columnName,
@@ -110,32 +108,36 @@ Page({
    * 请求数据
    */
   requestListData(params, callback) {
+    wx.showLoading({
+      title: '玩命加载中',
+    });
     const paramsObj = params ? params : this.data.listDataParams;
     let listData = [];
-    console.log(paramsObj, 'paramsObj');
     const that = this;
-    wx.request({
-      url: apiUrl + '/b/a/coin/search',
-      data: paramsObj,
-      method: 'GET',
-      success: function (res) {
-        res.data.data.forEach(item => {
+
+    http.get(apiUrl + '/b/a/coin/cpc/search', this.data.listDataParams)
+      .then((res) => {
+        res.data.list.forEach(item => {
           item.base = item.base.toUpperCase();
+          item.rateStrFormat = util.getFloat(item.rateStr.slice(0, -1), 2).toFixed(2) + '%';
           item.rateStrIsDown = item.rateStr.indexOf('-') > -1;
           item.closeToFixed = util.getFloat(item.close, 8);
           item.closeCnyToFixed = util.getFloat(item.closeCny, 8);
         })
         if (paramsObj.start === 1) {
-          listData = [].concat(res.data.data);
+          listData = [].concat(res.data.list);
         } else {
-          listData = that.data.listData.concat(res.data.data);
+          listData = that.data.listData.concat(res.data.list);
         }
         that.setData({
           listData: listData
         });
+
+        wx.hideLoading();
         callback && callback();
-      },
-      fail: function (res) { },
-    })
+      })
+      .catch((err) => {
+        wx.hideLoading();
+      })
   }
 });

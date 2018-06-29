@@ -1,5 +1,6 @@
 const app = getApp();
 import util from '../../utils/util.js';
+import http from '../../utils/http.js';
 const apiUrl = app.globalData.apiUrl;
 
 Page({
@@ -14,12 +15,11 @@ Page({
     isEmptySearchResult: false,
     searchResult: [],
     searchResultParams: {
-      content: '',
-      sort: 0,
+      symbol: '',
+      sort: -1,
       sortType: '',
       limit: 20,
       start: 1,
-      exchange: '',
     },
   },
 
@@ -67,7 +67,7 @@ Page({
     const searchValue = e.detail.value;
     this.setData({
       searchWord: searchValue,
-      'searchResultParams.content': searchValue
+      'searchResultParams.symbol': searchValue
     })
   },
 
@@ -81,6 +81,7 @@ Page({
     }
     const that = this;
     this.requestSearchResult(null, function(res) {
+      console.log(res, '00')
       if(res.length > 0) {
         that.setSearchHistory();
         that.setData({
@@ -105,9 +106,9 @@ Page({
       searchResult: [],
       isEmptySearchResult: false
     });
-    wx.navigateBack({
-      delta: 1
-    })
+    // wx.navigateBack({
+    //   delta: 1
+    // })
   },
 
   /**
@@ -141,56 +142,70 @@ Page({
   },
 
   /**
+   * 点击标签搜索
+   */
+  handelSearch(e) {
+    const searchValue = e.currentTarget.dataset.searchWord;
+    this.setData({
+      isFocus: true,
+      searchWord: searchValue,
+      'searchResultParams.symbol': searchValue
+    })
+    this.requestSearchResult();
+  },
+
+  /**
    * 请求热门币种
    */
   requestHotCoins() {
     const that = this;
-    wx.request({
-      url: apiUrl + '/b/a/coin/hot',
-      method: 'GET',
-      success: function (res) {
+    http.get(apiUrl + '/b/a/coin/hot')
+      .then(res => {
         that.setData({
-          hotCoins: res.data.data
+          hotCoins: res.data
         });
-      },
-      fail: function (res) { },
-    })
+      })
+      .catch(err => {
+        console.log(err, 'err 热门')
+      })
   },
 
   /**
    * 请求搜索数据
    */
   requestSearchResult(params, callback) {
+    wx.showLoading({
+      title: '玩命加载中',
+    });
     const paramsObj = params ? params : this.data.searchResultParams;
     let searchResult = [];
     console.log(paramsObj, 'paramsObj');
     const that = this;
-    wx.request({
-      url: apiUrl + '/b/a/coin/search',
-      data: paramsObj,
-      method: 'GET',
-      success: function (res) {
-        res.data.data.forEach(item => {
+
+    http.get(apiUrl + '/b/a/coin/cpc/search', paramsObj)
+      .then(res => {
+        console.log(res, '000')
+        res.data.list.forEach(item => {
           item.base = item.base.toUpperCase();
+          item.rateStrFormat = util.getFloat(item.rateStr.slice(0, -1), 2).toFixed(2) + '%';
           item.rateStrIsDown = item.rateStr.indexOf('-') > -1;
           item.closeToFixed = util.getFloat(item.close, 8);
           item.closeCnyToFixed = util.getFloat(item.closeCny, 8);
         })
         if (paramsObj.start === 1) {
-          searchResult = [].concat(res.data.data);
+          searchResult = [].concat(res.data.list);
         } else {
-          searchResult = that.data.searchResult.concat(res.data.data);
+          searchResult = that.data.searchResult.concat(res.data.list);
         }
         that.setData({
           searchResult: searchResult
         });
-        callback && callback(res.data.data);
-      },
-      fail: function (res) {
-        wx.showToast({
-          title: '请求出粗，请重新尝试',
-        })
-      },
-    })
+        callback && callback(res.data.data.list);
+        wx.hideLoading();
+      })
+      .catch(err => {
+        console.log(err, 'err 搜索')
+        wx.hideLoading();
+      })
   },
 });

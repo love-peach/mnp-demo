@@ -1,6 +1,6 @@
 <template name="list-item">
   <navigator
-    url="/pages/details/details?searchWord={{itemData.base}}"
+    url="/pages/details/details?searchWord={{itemData.base}}&closeToFixed={{itemData.closeToFixed}}&closeCnyToFixed={{itemData.closeCnyToFixed}}&rateStrIsDown={{itemData.rateStrIsDown}}&rateStrFormat={{itemData.rateStrFormat}}&symbol={{itemData.symbol}}&coinId={{itemData.coinId}}"
     hover-class="navigator-hover"
     >
     <view class="tr">
@@ -10,7 +10,7 @@
         <view class="price-sub">{{itemData.closeCnyToFixed}}</view>
       </view>
       <view class="td row-change">
-        <view class="{{[itemData.rateStrIsDown ? 'card-negative' : 'card-positive', 'card']}}">{{itemData.rateStr}}</view>
+        <view class="{{[itemData.rateStrIsDown ? 'card-negative' : 'card-positive', 'card']}}">{{itemData.rateStrFormat}}</view>
       </view>
     </view>
   </navigator>

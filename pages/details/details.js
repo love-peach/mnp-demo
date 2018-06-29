@@ -1,6 +1,9 @@
 const app = getApp();
 
 import { weiboData } from './data.js';
+import http from '../../utils/http.js';
+import util from '../../utils/util.js';
+const apiUrl = app.globalData.apiUrl;
 let wxparse = require("../../wxParse/wxParse.js");
 
 Page({
@@ -10,22 +13,45 @@ Page({
    */
   data: {
     discussList: [],
-    searchWord: ''
+    searchWord: '',
+    closeToFixed: '',
+    closeCnyToFixed: '',
+    rateStrIsDown: '',
+    rateStrFormat: '',
+    symbolStr: '',
+    coinId: '',
+    coinData: {},
+    weiboParams: {
+      symbol: '',
+      pageIndex: 0,
+      pageCount: 10
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    console.log(options, 'options');
+    wx.showLoading({
+      title: '玩命加载中',
+    });
     this.setData({
-      discussList: weiboData.data.cards[0].card_group
+      searchWord: options.searchWord,
+      closeToFixed: options.closeToFixed,
+      closeCnyToFixed: options.closeCnyToFixed,
+      rateStrIsDown: options.rateStrIsDown === 'false' ? false : true,
+      rateStrFormat: options.rateStrFormat,
+      symbolStr: options.symbol,
+      coinId: options.coinId,
+      'weiboParams.symbol': options.symbol
     });
     wx.setNavigationBarTitle({
       title: options.searchWord
     });
-    this.setData({
-      searchWord: options.searchWord
-    });
+    this.requestCoinDataOne();
+    // this.requestCoinDataTwo();
+    this.requestWeiboData();
   },
 
   /**
@@ -47,41 +73,128 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    setTimeout(function () {
+    this.setData({
+      'weiboParams.pageIndex': 0
+    });
+    this.requestWeiboData(null, function () {
       wx.stopPullDownRefresh();
-    }, 800)
-    // wx.request({
-    //   url: '',
-    //   data: {},
-    //   method: 'GET',
-    //   success: function (res) { },
-    //   fail: function (res) { },
-    //   complete: function (res) {
-    //     wx.stopPullDownRefresh();
-    //   }
-    // })
+    });
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-    var that = this;
+    const { pageIndex } = this.data.weiboParams;
+    this.setData({
+      'weiboParams.pageIndex': pageIndex + 1
+    });
+    this.requestWeiboData();
+  },
+
+  /**
+   * 请求币数据11
+   */
+  requestCoinDataOne(params, callback) {
     wx.showLoading({
       title: '玩命加载中',
-    })
-    setTimeout(function () {
-      wx.hideLoading();
-    }, 800)
-    // page = page + 1;
-    // wx.request({
-    //   url: 'https://xxx/?page=' + page,
-    //   method: "GET",
-    //   success: function (res) {
-    //     wx.hideLoading();
-    //   }
-    // })
-  }, 
+    });
+    const paramsObj = params ? params : {
+      collectName: this.data.symbolStr
+    };
+    const that = this;
+
+    http.get(apiUrl + '/b/a/coin/detail/' + that.data.coinId)
+      .then(res => {
+        const circulationMarketValue = res.data.countCap * that.data.closeCnyToFixed;
+        const circulationMarketValueStr = that.moneyValueFormat(circulationMarketValue);
+
+        that.setData({
+          coinData: res.data,
+          'coinData.countCapFormat': that.moneyValueFormat(res.data.countCap),
+          'coinData.circulationMarketValue': circulationMarketValueStr
+        })
+        callback && callback();
+        wx.hideLoading();
+      })
+      .catch(err => {
+        wx.hideLoading();
+        console.log(err, 'err 币详情')
+      })
+  },
+
+  /**
+   * 以 亿 万 来格式化数字
+   */
+  moneyValueFormat(num) {
+    const unitValueYI = num / 100000000;
+    const unitValueWan = num / 10000;
+    let valueStr = '';
+    if (unitValueYI >= 1) {
+      valueStr = util.getFloat(unitValueYI, 2) + '亿'
+    } else if (unitValueWan >= 1) {
+      valueStr = util.getFloat(unitValueWan, 2) + '万'
+    } else {
+      valueStr = util.getFloat(num, 2)
+    }
+    return valueStr;
+  },
+
+  /**
+   * 请求币数据22
+   */
+  requestCoinDataTwo(params, callback) {
+    wx.showLoading({
+      title: '玩命加载中',
+    });
+    const paramsObj = params ? params : {
+      symbol: this.data.symbolStr
+    };
+    const that = this;
+    http.get('http://172.29.30.31:8100/k/a/all/current', paramsObj)
+      .then(res => {
+        console.log(res, 'res222')
+        // that.setData({
+        //   coinData: res.data
+        // })
+        callback && callback();
+        wx.hideLoading();
+      })
+      .catch(err => {
+        wx.hideLoading();
+        console.log(err, 'err 币详情')
+      })
+  },
+
+  /**
+   * 请求微博数据
+   */
+  requestWeiboData(params, callback) {
+    wx.showLoading({
+      title: '玩命加载中',
+    });
+    const paramsObj = params ? params : this.data.weiboParams
+    const that = this;
+
+    http.get(apiUrl + '/b/a/sinaweibo', paramsObj)
+      .then(res => {
+        let weiboListData = [];
+        if (paramsObj.pageIndex === 0) {
+          weiboListData = [].concat(res.data.data);
+        } else {
+          weiboListData = that.data.discussList.concat(res.data.data);
+        }
+        that.setData({
+          discussList: weiboListData
+        });
+        callback && callback();
+        wx.hideLoading();
+      })
+      .catch(err => {
+        wx.hideLoading();
+        console.log(err, 'err 微博')
+      })
+  },
 
   /**
    * 跳转到web-view
@@ -93,7 +206,6 @@ Page({
       srcOg = 'https://m.weibo.cn' + srcOg;
     }
     var srcNew = srcOg.replace(/\?/ig, '&');
-    console.log(srcNew, 'srcNew')
     wx.navigateTo({
       url: `/pages/web-view/web-view?url=${srcNew}`
     });

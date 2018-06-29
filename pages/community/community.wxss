@@ -8,18 +8,20 @@
 .text-title {
   width: 580rpx;
   margin: 60rpx auto 0;
-  text-align: left;
   font-size: 32rpx;
   font-weight: 500;
   color: #4A4A4A;
 }
 
 .qrcode-img {
-  width: 600rpx;
-  height: 600rpx;
-  margin: 0 auto;
+  width: 520rpx;
+  height: 520rpx;
+  margin: 20rpx auto 0;
 }
 
+.text-tip {
+  margin-top: 20rpx;
+}
 .text-tip,
 .text-bottom {
   font-size: 28rpx;

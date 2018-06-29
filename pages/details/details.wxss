@@ -47,9 +47,15 @@
 .info-sub .item-data-positive {
   color: #019802;
 }
+.info-sub .item-data-positive::before {
+   content: '+'; 
+   position: relative;
+   top: -2rpx;
+}
 .info-sub .item-data-negative {
   color: #E93030;
 }
+
 /*=========================== 概览样式 end  ===========================*/
 
 /*=========================== 微博样式 start  ===========================*/

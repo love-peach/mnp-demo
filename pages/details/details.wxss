@@ -153,6 +153,8 @@
   width: 32rpx;
   height: 32rpx;
   margin-right: 10rpx;
+  margin-bottom: 5rpx;
+
 }
 .tab-bottom-wrap .tab-item .icon-home {
   height: 32rpx;

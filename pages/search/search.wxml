@@ -18,9 +18,7 @@
           bindinput="handleTyping"
           bindconfirm="handleSearch"
         />
-        <view wx:if="{{searchWord}}" class="close-icon-wrap" bindtap="handleCancel">×
-          <!-- <image class="close-icon" src="/res/img/icon_search.png" /> -->
-        </view>
+        <image wx:if="{{searchWord}}" class="close-icon" src="/res/img/icon_close.png" bindtap="handleCancel" />
       </view>
       <navigator class="search-btn" hover-class="none" url="/pages/index/index" open-type="switchTab">取消
       </navigator>

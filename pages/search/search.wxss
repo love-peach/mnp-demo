@@ -53,6 +53,10 @@
 }
 
 .search-wrap .close-icon {
+  position: absolute;
+  top: 50%;
+  right: 15rpx;
+  transform: translate(0, -50%);
   height: 32rpx;
   width: 32rpx;
   line-height: 1;

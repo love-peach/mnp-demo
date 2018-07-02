@@ -8,21 +8,27 @@
       <text class="price-sub">￥{{closeCnyToFixed}}</text>
     </view>
     <view class="info-sub">
-      <view class="sub-item">
-        <text class="item-title">涨跌</text>
-        <view class="{{[rateStrIsDown ? 'item-data-negative' : 'item-data-positive',  'item-data']}}">{{rateStrFormat}}</view>
+      <view class="item-part item-part-one">
+        <view class="sub-item">
+          <text class="item-title">涨跌</text>
+          <view class="{{[rateStrIsDown ? 'item-data-negative' : 'item-data-positive',  'item-data']}}">{{rateStrFormat}}</view>
+        </view>
+        <view class="sub-item">
+          <text class="item-title">流通市值</text>
+          <text class="item-data item-data-circulationMarketValue">￥{{coinData.circulationMarketValue}}</text>
+        </view>
       </view>
-      <view class="sub-item">
-        <text class="item-title">发行总量</text>
-        <text class="item-data">{{coinData.maxSupply}}</text>
-      </view>
-      <view class="sub-item">
-        <text class="item-title">流通市值</text>
-        <text class="item-data">￥{{coinData.circulationMarketValue}}</text>
-      </view>
-      <view class="sub-item">
-        <text class="item-title">流通数量</text>
-        <text class="item-data">{{coinData.countCapFormat}}</text>
+
+      <view class="item-part item-part-two">
+        <view class="sub-item">
+          <text class="item-title">发行总量</text>
+          <text class="item-data">{{coinData.maxSupply}}</text>
+        </view>
+        
+        <view class="sub-item">
+          <text class="item-title">流通数量</text>
+          <text class="item-data">{{coinData.countCapFormat}}</text>
+        </view>
       </view>
     </view>
   </view>

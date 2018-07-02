@@ -12,6 +12,7 @@ Page({
     rankTypes: ['descending', 'ascending', ''],
     rankIndex: 0,
     listData: [],
+    totalPages: 1,
     listDataParams: {
       symbol: '',
       sort: -1,
@@ -63,7 +64,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
+    const { totalPages } = this.data;
     const { limit, start } = this.data.listDataParams;
+    if (start > limit * totalPages) {
+      wx.showToast({
+        title: '已没有更多数据了！',
+        icon: 'none',
+        duration: 3000
+      })
+      return false;
+    }
     this.setData({
       'listDataParams.start': start + limit
     });
@@ -133,7 +143,8 @@ Page({
           listData = that.data.listData.concat(res.data.list);
         }
         that.setData({
-          listData: listData
+          listData: listData,
+          totalPages: res.data.totalPages
         });
 
         wx.hideLoading();

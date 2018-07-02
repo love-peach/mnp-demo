@@ -98,7 +98,7 @@ Page({
     this.setData({
       'weiboParams.pageIndex': pageIndex + 1
     });
-    // this.requestWeiboData();
+    this.requestWeiboData();
   },
 
   /**

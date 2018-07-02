@@ -62,7 +62,7 @@
   <view class="tab-bottom-wrap">
     <navigator class="tab-item" url="/pages/index/index" open-type="switchTab">
       <image class="tab-icon icon-home" src="/res/img/icon_home.png" />
-      <view>币发首页</view>
+      <view class="tab-text">币发首页</view>
     </navigator>
     
     <button class="tab-item" open-type="share" plain="{{true}}">

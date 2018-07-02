@@ -151,4 +151,5 @@
 }
 .tab-bottom-wrap .tab-item .tab-text {
   font-size: 28rpx;
+  color: #191919;
 }

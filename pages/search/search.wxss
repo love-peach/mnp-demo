@@ -23,6 +23,7 @@
 .search-wrap .search-input {
   height: 60rpx;
   padding-left: 68rpx;
+  padding-right: 68rpx;
   color: #728BAE;
   font-size: 28rpx;
 }
@@ -33,6 +34,28 @@
   top: 50%;
   left: 20rpx;
   transform: translate(0, -50%);
+}
+
+.search-wrap .close-icon-wrap {
+  position: absolute;
+  top: 50%;
+  right: 10rpx;
+  transform: translate(0, -50%);
+  
+  text-align: center;
+  height: 44rpx;
+  width: 44rpx;
+  line-height: 40rpx;
+  color: #fff;
+  border-radius: 50rpx;
+  background-color: #ccc;
+  font-size: 36rpx;
+}
+
+.search-wrap .close-icon {
+  height: 32rpx;
+  width: 32rpx;
+  line-height: 1;
 }
 .search-bar .search-btn {
   flex-basis: 4em;

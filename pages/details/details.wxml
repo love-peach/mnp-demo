@@ -57,4 +57,17 @@
       </view>
     </block>
   </view>
+
+  <!-- 底部按钮  -->
+  <view class="tab-bottom-wrap">
+    <navigator class="tab-item" url="/pages/index/index" open-type="switchTab">
+      <image class="tab-icon icon-home" src="/res/img/icon_home.png" />
+      <view>币发首页</view>
+    </navigator>
+    
+    <button class="tab-item" open-type="share" plain="{{true}}">
+      <image class="tab-icon" src="/res/img/icon_share.png" />
+      <view class="tab-text">立即分享</view>
+    </button>
+  </view>
 </view>

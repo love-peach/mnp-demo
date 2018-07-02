@@ -32,7 +32,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    console.log(res, 'res');
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
@@ -48,11 +47,15 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    wx.showNavigationBarLoading();
     this.setData({
       'listDataParams.start': 1
     });
     this.requestListData(null, function () {
-      wx.stopPullDownRefresh();
+      setTimeout(() => {
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
+      }, 500)
     });
   },
 
@@ -117,7 +120,6 @@ Page({
 
     http.get(apiUrl + '/b/a/coin/cpc/search', this.data.listDataParams)
       .then((res) => {
-        console.log(res, 'res0000000')
         res.data.list.forEach(item => {
           item.base = item.base.toUpperCase();
           item.rateStrFormat = util.getFloat(item.rateStr.slice(0, -1), 2).toFixed(2) + '%';

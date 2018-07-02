@@ -62,10 +62,19 @@ Page({
       // 来自页面内转发按钮
       console.log(res.target)
     }
+    const {
+      searchWord,
+      closeToFixed,
+      closeCnyToFixed,
+      rateStrIsDown,
+      rateStrFormat,
+      symbolStr,
+      coinId
+    } = this.data;
     return {
       title: '币发-详情',
       // desc: '让你比别人多赚点',
-      path: '/pages/details/details?searchWord=' + this.data.searchWord
+      path: `/pages/details/details?searchWord=${searchWord}&closeToFixed=${closeToFixed}&closeCnyToFixed=${closeCnyToFixed}&rateStrIsDown=${rateStrIsDown}&rateStrFormat=${rateStrFormat}&symbol=${symbolStr}&coinId={{coinId}}`
     }
   },
 
@@ -89,7 +98,7 @@ Page({
     this.setData({
       'weiboParams.pageIndex': pageIndex + 1
     });
-    this.requestWeiboData();
+    // this.requestWeiboData();
   },
 
   /**

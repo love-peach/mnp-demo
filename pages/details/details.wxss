@@ -1,3 +1,7 @@
+.container {
+  padding-bottom:100rpx;
+  box-sizing: border-box;
+}
 /*=========================== 概览样式 start  ===========================*/
 .overview {
   display: flex;
@@ -113,3 +117,38 @@
 }
 
 /*=========================== 微博样式 end  ===========================*/
+
+/* 底部tab样式  */
+
+.tab-bottom-wrap {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-top: 2rpx solid #EAEDF3;
+}
+.tab-bottom-wrap .tab-item {
+  display: flex;
+  flex: 1;
+  justify-content:center;
+  align-items: center;
+  padding: 10rpx;
+  border: 0;
+  line-height: 2;
+}
+.tab-bottom-wrap .tab-item .tab-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+.tab-bottom-wrap .tab-item .icon-home {
+  height: 32rpx;
+  width: 36rpx;
+}
+.tab-bottom-wrap .tab-item .tab-text {
+  font-size: 28rpx;
+}

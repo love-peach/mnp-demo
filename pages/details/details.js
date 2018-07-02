@@ -49,8 +49,7 @@ Page({
     wx.setNavigationBarTitle({
       title: options.searchWord
     });
-    this.requestCoinDataOne();
-    // this.requestCoinDataTwo();
+    this.requestCoinData();
     this.requestWeiboData();
   },
 
@@ -72,9 +71,9 @@ Page({
       coinId
     } = this.data;
     return {
-      title: '币发-详情',
-      // desc: '让你比别人多赚点',
-      path: `/pages/details/details?searchWord=${searchWord}&closeToFixed=${closeToFixed}&closeCnyToFixed=${closeCnyToFixed}&rateStrIsDown=${rateStrIsDown}&rateStrFormat=${rateStrFormat}&symbol=${symbolStr}&coinId={{coinId}}`
+      title: '币发早知道',
+      desc: searchWord + '实时消息讨论',
+      path: `/pages/details/details?searchWord=${searchWord}&closeToFixed=${closeToFixed}&closeCnyToFixed=${closeCnyToFixed}&rateStrIsDown=${rateStrIsDown}&rateStrFormat=${rateStrFormat}&symbol=${symbolStr}&coinId=${coinId}`
     }
   },
 
@@ -102,9 +101,9 @@ Page({
   },
 
   /**
-   * 请求币数据11
+   * 请求币数据
    */
-  requestCoinDataOne(params, callback) {
+  requestCoinData(params, callback) {
     wx.showLoading({
       title: '玩命加载中',
     });
@@ -147,32 +146,6 @@ Page({
       valueStr = util.getFloat(num, 2)
     }
     return valueStr;
-  },
-
-  /**
-   * 请求币数据22
-   */
-  requestCoinDataTwo(params, callback) {
-    wx.showLoading({
-      title: '玩命加载中',
-    });
-    const paramsObj = params ? params : {
-      symbol: this.data.symbolStr
-    };
-    const that = this;
-    http.get('http://172.29.30.31:8100/k/a/all/current', paramsObj)
-      .then(res => {
-        console.log(res, 'res222')
-        // that.setData({
-        //   coinData: res.data
-        // })
-        callback && callback();
-        wx.hideLoading();
-      })
-      .catch(err => {
-        wx.hideLoading();
-        console.log(err, 'err 币详情')
-      })
   },
 
   /**

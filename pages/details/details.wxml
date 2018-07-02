@@ -35,7 +35,13 @@
 
   <!-- 币种讨论 -->
   <view class="discuss-part-title">币种讨论</view>
-  <view class="discuss">
+
+  <view wx:if="{{discussList.length === 0}}" class="discuss-empty">
+    <image class="empty-img" src="/res/img/search_empty.png" />
+    <text class="empty-text">暂无数据</text>
+  </view>
+  
+  <view  wx:if="{{discussList.length !== 0}}" class="discuss">
     <block wx:for="{{discussList}}" wx:key="{{item.itemid}}">
 
       <view class="discuss-item-wrap">

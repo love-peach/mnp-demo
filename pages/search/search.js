@@ -3,6 +3,18 @@ import util from '../../utils/util.js';
 import http from '../../utils/http.js';
 const apiUrl = app.globalData.apiUrl;
 
+
+var throttle = function (fn, delay) {
+  var timer = null;
+  return function () {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);//context调用fn的方法，指针指向了fn
+    }, delay);
+  }
+}
+
 Page({
   /**
    * 页面的初始数据
@@ -37,7 +49,7 @@ Page({
       success: function (res) {
         if (res.data) {
           that.setData({
-            searchHistory: res.data.slice(-10)
+            searchHistory: res.data.slice(0, 10)
           });
         }
       }
@@ -69,19 +81,30 @@ Page({
       searchWord: searchValue,
       'searchResultParams.symbol': searchValue
     })
+    // throttle(this.handleSearch, 100)
+    this.throttle(this.handleSearch);
+  },
+
+  /**
+   * 节流函数
+   */
+  throttle(method, context) {
+    clearTimeout(method.tId);
+    method.tId = setTimeout(function () {
+      method.call(context);
+    }, 500);
   },
 
   /**
    * 输入框事件--监听回车，确认
    */
-  handleSearch(e) {
+  handleSearch() {
     const { searchWord } = this.data
     if (!searchWord) {
       return false;
     }
     const that = this;
     this.requestSearchResult(null, function(res) {
-      console.log(res, '00')
       if(res.length > 0) {
         that.setSearchHistory();
         that.setData({
@@ -118,14 +141,15 @@ Page({
     const { searchWord, searchHistory} = this.data;
     const historyNew = searchHistory.map(item => item);
     if (!historyNew.includes(searchWord)) {
-      historyNew.push(searchWord)
+      historyNew.unshift(searchWord)
     }
     wx.setStorage({
       key: "searchHistory",
       data: historyNew
     });
+    console.log(historyNew, 'historyNew');
     this.setData({
-      searchHistory: historyNew
+      searchHistory: historyNew.slice(0, 10)
     });
   },
   
@@ -179,12 +203,10 @@ Page({
     });
     const paramsObj = params ? params : this.data.searchResultParams;
     let searchResult = [];
-    console.log(paramsObj, 'paramsObj');
     const that = this;
 
     http.get(apiUrl + '/b/a/coin/cpc/search', paramsObj)
       .then(res => {
-        console.log(res, '000')
         res.data.list.forEach(item => {
           item.base = item.base.toUpperCase();
           item.rateStrFormat = util.getFloat(item.rateStr.slice(0, -1), 2).toFixed(2) + '%';

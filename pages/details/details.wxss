@@ -82,8 +82,27 @@
   border-bottom: 1px solid #EAEDF3;
   background-color: #fff;
 }
+
+/* 搜索结果 空样式 */
+.discuss-empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F3F6FA;
+}
+.discuss-empty .empty-img {
+  width: 300rpx;
+  height: 300rpx;
+}
+.discuss-empty .empty-text {
+  font-size: 28rpx;
+  color: #48668F;
+}
+
 .discuss {
-  
+  flex: 1;
 }
 .discuss-item-wrap {
   background-color: #fff;
